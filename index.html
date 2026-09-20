@@ -11,8 +11,9 @@
 
     <style>
         /* =========================
-           RESET & GENERAL STYLES
+           GENERAL
         ========================= */
+
         * {
             margin: 0;
             padding: 0;
@@ -25,108 +26,163 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            background-color: #05070c;
+            background: #0d0d0d;
             color: #ffffff;
+            overflow-x: hidden;
         }
 
+        /* Texte rouge lumineux (Neon Glow) */
         .red-text {
             color: #ff1e27;
+            text-shadow: 0 0 12px rgba(255, 30, 39, 0.8), 0 0 25px rgba(255, 30, 39, 0.4);
+        }
+
+        /* Keyframes pour les animations de lueur */
+        @keyframes redPulse {
+            0% {
+                box-shadow: 0 0 12px rgba(255, 30, 39, 0.4), 0 0 25px rgba(255, 30, 39, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 22px rgba(255, 30, 39, 0.85), 0 0 40px rgba(255, 30, 39, 0.5);
+            }
+            100% {
+                box-shadow: 0 0 12px rgba(255, 30, 39, 0.4), 0 0 25px rgba(255, 30, 39, 0.2);
+            }
+        }
+
+        @keyframes discordPulse {
+            0% {
+                box-shadow: 0 0 12px rgba(88, 101, 242, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 25px rgba(88, 101, 242, 0.85);
+            }
+            100% {
+                box-shadow: 0 0 12px rgba(88, 101, 242, 0.4);
+            }
         }
 
         /* =========================
-           1. NAVIGATION BAR (Image 1)
+           HEADER & NAVBAR
         ========================= */
-        header.navbar {
-            background-color: #030509;
-            padding: 18px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+        header {
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(10px);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: rgba(15, 15, 15, 0.85);
+            border-bottom: 2px solid #ff1e27;
+            box-shadow: 0 4px 20px rgba(255, 30, 39, 0.3);
+            backdrop-filter: blur(12px);
         }
 
         .logo {
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
             letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
         }
 
-        .nav-links {
+        nav {
             display: flex;
+            align-items: center;
             gap: 30px;
         }
 
-        .nav-links a {
-            color: #8f9cae;
-            text-decoration: none;
-            font-size: 15px;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover {
+        nav a {
             color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
 
+        nav a:hover {
+            color: #ff1e27;
+            text-shadow: 0 0 10px rgba(255, 30, 39, 0.7);
+        }
+
+        /* Bouton Discord Nav */
         .discord-btn-nav {
-            background-color: #5865F2;
-            padding: 8px 16px;
+            background: linear-gradient(135deg, #5865F2, #7289da);
+            padding: 8px 18px;
             border-radius: 6px;
             color: white !important;
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 14px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
+            animation: discordPulse 3.5s infinite ease-in-out;
+            transition: all 0.3s ease;
         }
 
         .discord-btn-nav:hover {
-            background-color: #4752C4;
+            filter: brightness(1.2);
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(88, 101, 242, 0.9);
         }
 
         /* =========================
            HERO SECTION
         ========================= */
+
         .hero {
-            min-height: 500px;
+            min-height: 600px;
             display: flex;
             align-items: center;
             padding: 80px 8%;
+            position: relative;
+            overflow: hidden;
             background: 
-                radial-gradient(circle at 80% 30%, rgba(255, 30, 39, 0.15), transparent 40%),
-                linear-gradient(135deg, #05070c, #11141d);
+                radial-gradient(circle at 80% 30%, rgba(255, 30, 39, 0.25), transparent 50%),
+                linear-gradient(135deg, #090909, #141414);
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 20%;
+            right: 15%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 30, 39, 0.15);
+            filter: blur(90px);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
         .hero-content {
             max-width: 700px;
+            position: relative;
+            z-index: 1;
         }
 
         .small-title {
             color: #ff1e27;
-            font-size: 14px;
+            font-size: 15px;
             font-weight: bold;
             letter-spacing: 3px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(255, 30, 39, 0.6);
         }
 
         .hero h1 {
-            font-size: 50px;
+            font-size: 58px;
             line-height: 1.1;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-weight: 800;
         }
 
         .description {
             color: #b0b0b0;
-            font-size: 17px;
-            line-height: 1.6;
-            margin-bottom: 25px;
+            font-size: 18px;
+            line-height: 1.7;
+            max-width: 600px;
+            margin-bottom: 10px;
         }
 
         .hero-buttons {
@@ -135,44 +191,52 @@
             flex-wrap: wrap;
         }
 
+        /* =========================
+           BUTTONS
+        ========================= */
+
         .btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            padding: 12px 26px;
-            background: #ff1e27;
+            margin-top: 30px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #ff1e27, #ff4f56);
             color: white;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 700;
-            transition: 0.3s;
-            box-shadow: 0 4px 20px rgba(255, 30, 39, 0.4);
+            transition: all 0.3s ease;
+            animation: redPulse 3s infinite ease-in-out;
         }
 
         .btn:hover {
-            background: #d6111a;
-            transform: translateY(-2px);
+            filter: brightness(1.2);
+            transform: translateY(-3px) scale(1.02);
         }
 
         .btn-discord {
-            background: #5865F2;
-            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4);
+            background: linear-gradient(135deg, #5865F2, #7289da);
+            animation: discordPulse 3.5s infinite ease-in-out;
         }
 
         .btn-discord:hover {
-            background: #4752C4;
+            filter: brightness(1.2);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 0 30px rgba(88, 101, 242, 0.8);
         }
 
         /* =========================
-           PRODUCTS & FILTERS SECTION
+           PRODUCTS & FILTERS
         ========================= */
+
         .products {
-            padding: 80px 8%;
+            padding: 90px 8%;
         }
 
         .section-title {
             text-align: center;
-            margin-bottom: 35px;
+            margin-bottom: 45px;
         }
 
         .section-title p {
@@ -180,15 +244,15 @@
             font-size: 14px;
             letter-spacing: 3px;
             font-weight: bold;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
+            text-shadow: 0 0 10px rgba(255, 30, 39, 0.5);
         }
 
         .section-title h2 {
-            font-size: 36px;
+            font-size: 40px;
             font-weight: 800;
         }
 
-        /* FILTER BUTTONS (ALL / ONLINE / OFFLINE) */
         .filter-container {
             display: flex;
             justify-content: center;
@@ -197,9 +261,9 @@
         }
 
         .filter-btn {
-            background: #121620;
+            background: #151515;
             color: #ffffff;
-            border: 1px solid #262c3a;
+            border: 1px solid rgba(255, 30, 39, 0.3);
             padding: 10px 24px;
             border-radius: 8px;
             font-weight: 700;
@@ -210,16 +274,20 @@
 
         .filter-btn:hover {
             border-color: #ff1e27;
+            box-shadow: 0 0 15px rgba(255, 30, 39, 0.4);
         }
 
         .filter-btn.active {
-            background: #ff1e27;
+            background: linear-gradient(135deg, #ff1e27, #ff4f56);
             border-color: #ff1e27;
             color: #ffffff;
-            box-shadow: 0 4px 15px rgba(255, 30, 39, 0.4);
+            box-shadow: 0 0 20px rgba(255, 30, 39, 0.6);
         }
 
-        /* PRODUCT CARDS */
+        /* =========================
+           CARDS
+        ========================= */
+
         .cards {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
@@ -227,22 +295,22 @@
         }
 
         .card {
-            background: #0f121a;
-            border: 1px solid #1f2430;
+            background: #151515;
+            border: 1px solid rgba(255, 30, 39, 0.2);
             border-radius: 14px;
             overflow: hidden;
-            transition: 0.3s;
+            transition: all 0.4s ease;
         }
 
         .card:hover {
-            transform: translateY(-6px);
+            transform: translateY(-8px);
             border-color: #ff1e27;
-            box-shadow: 0 10px 30px rgba(255, 30, 39, 0.2);
+            box-shadow: 0 0 25px rgba(255, 30, 39, 0.4);
         }
 
         .game-image {
             width: 100%;
-            height: 200px;
+            height: 210px;
             overflow: hidden;
         }
 
@@ -258,7 +326,7 @@
         }
 
         .game-info {
-            padding: 20px;
+            padding: 22px;
         }
 
         .category {
@@ -266,12 +334,13 @@
             font-size: 12px;
             font-weight: bold;
             letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(255, 30, 39, 0.4);
         }
 
         .game-info h3 {
-            font-size: 20px;
-            margin-top: 6px;
-            margin-bottom: 6px;
+            font-size: 22px;
+            margin-top: 10px;
+            margin-bottom: 8px;
             font-weight: 700;
         }
 
@@ -284,33 +353,108 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-top: 18px;
+            margin-top: 20px;
         }
 
         .price {
             color: #ffffff;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 800;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
         }
 
         .buy {
-            background: #ff1e27;
+            background: linear-gradient(135deg, #ff1e27, #ff4f56);
             color: white;
             text-decoration: none;
-            padding: 8px 18px;
+            padding: 10px 18px;
             border-radius: 7px;
             font-size: 14px;
             font-weight: bold;
-            transition: 0.3s;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(255, 30, 39, 0.4);
         }
 
         .buy:hover {
-            background: #d6111a;
+            filter: brightness(1.2);
+            box-shadow: 0 0 15px rgba(255, 30, 39, 0.8);
         }
 
         /* =========================
-           2. CHAT WIDGET (Image 2)
+           STAFF SECTION
         ========================= */
+
+        .staff-section {
+            padding: 90px 8%;
+            background: #111111;
+            border-top: 1px solid #222222;
+        }
+
+        .staff-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .staff-card {
+            background: #151515;
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            padding: 25px 20px;
+            border-radius: 16px;
+            width: 230px;
+            text-align: center;
+            transition: 0.3s ease;
+        }
+
+        .staff-card:hover {
+            transform: translateY(-6px);
+            border-color: #5865F2;
+            box-shadow: 0 0 25px rgba(88, 101, 242, 0.5);
+        }
+
+        .staff-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid #5865F2;
+            margin-bottom: 15px;
+            object-fit: cover;
+            box-shadow: 0 0 15px rgba(88, 101, 242, 0.4);
+        }
+
+        .staff-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: #ffffff;
+        }
+
+        .staff-badge {
+            display: inline-block;
+            background: rgba(88, 101, 242, 0.2);
+            color: #5865F2;
+            border: 1px solid #5865F2;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-top: 10px;
+            text-shadow: 0 0 8px rgba(88, 101, 242, 0.6);
+        }
+
+        /* Badge spécifique pour l'Admin */
+        .staff-badge.admin {
+            background: rgba(255, 30, 39, 0.2);
+            color: #ff1e27;
+            border-color: #ff1e27;
+            text-shadow: 0 0 8px rgba(255, 30, 39, 0.6);
+        }
+
+        /* =========================
+           CHAT WIDGET
+        ========================= */
+
         .chat-widget-container {
             position: fixed;
             bottom: 25px;
@@ -322,13 +466,13 @@
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background-color: #7000ff;
+            background: linear-gradient(135deg, #ff1e27, #ff4f56);
             border: none;
             color: #ffffff;
-            font-size: 26px;
+            font-size: 24px;
             cursor: pointer;
             position: relative;
-            box-shadow: 0 4px 15px rgba(112, 0, 255, 0.4);
+            animation: redPulse 3s infinite ease-in-out;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -336,14 +480,14 @@
         }
 
         .chat-trigger-btn:hover {
-            transform: scale(1.05);
+            transform: scale(1.08);
         }
 
         .chat-trigger-btn .badge {
             position: absolute;
             top: -2px;
             right: 0px;
-            background-color: #ff2a2a;
+            background-color: #5865F2;
             color: #ffffff;
             font-size: 12px;
             font-weight: bold;
@@ -353,7 +497,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            border: 2px solid #05070c;
+            border: 2px solid #0d0d0d;
         }
 
         .chat-popup {
@@ -362,12 +506,12 @@
             bottom: 75px;
             right: 0;
             width: 310px;
-            background-color: rgba(10, 12, 20, 0.95);
+            background-color: rgba(21, 21, 21, 0.95);
             border-radius: 16px;
             padding: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(255, 30, 39, 0.3);
+            backdrop-filter: blur(12px);
         }
 
         .chat-popup.active {
@@ -389,7 +533,7 @@
             justify-content: center;
             align-items: center;
             font-size: 14px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
         }
 
         .chat-header-bubble {
@@ -398,7 +542,7 @@
             padding: 12px 16px;
             border-radius: 12px;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             margin-bottom: 20px;
             display: inline-block;
         }
@@ -411,90 +555,106 @@
         }
 
         .chat-opt-btn {
-            background-color: #ffffff;
-            color: #7000ff;
-            border: 2px solid #7000ff;
+            background: transparent;
+            color: #ff1e27;
+            border: 2px solid #ff1e27;
             padding: 8px 18px;
             border-radius: 20px;
             font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s ease;
         }
 
         .chat-opt-btn:hover {
-            background-color: #7000ff;
+            background: #ff1e27;
             color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 30, 39, 0.6);
         }
 
         /* =========================
-           FOOTER & CONTACT
+           CONTACT & FOOTER
         ========================= */
+
         .contact {
             text-align: center;
-            padding: 70px 20px;
-            background: #090c14;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 90px 20px;
+            background: #141414;
+            border-top: 1px solid #262626;
+            border-bottom: 1px solid #262626;
         }
 
         .contact h2 {
-            font-size: 34px;
-            margin-bottom: 12px;
+            font-size: 38px;
+            margin-bottom: 15px;
         }
 
         .contact p {
             color: #b0b0b0;
-            font-size: 16px;
+            font-size: 18px;
             margin-bottom: 20px;
+        }
+
+        .contact-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
         }
 
         footer {
             text-align: center;
-            padding: 40px 20px;
-            background: #030509;
+            padding: 50px 20px;
+            background: #090909;
         }
 
         footer h3 {
-            font-size: 22px;
-            margin-bottom: 8px;
+            font-size: 24px;
+            margin-bottom: 10px;
         }
 
         footer p {
             color: #888888;
+            margin-bottom: 10px;
         }
 
         .copyright {
             font-size: 13px;
-            margin-top: 20px;
+            margin-top: 25px;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 800px) {
-            .nav-links { display: none; }
-            .hero h1 { font-size: 36px; }
+        /* =========================
+           MOBILE RESPONSIVE
+        ========================= */
+
+        @media (max-width: 700px) {
+            header { padding: 0 5%; }
+            nav { gap: 12px; }
+            nav a { font-size: 13px; }
+            .discord-btn-nav { padding: 6px 12px; }
+            .hero { min-height: 500px; padding: 60px 6%; }
+            .hero h1 { font-size: 38px; }
+            .cards { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR (Image 1) -->
-    <header class="navbar">
+    <!-- NAVBAR -->
+    <header>
         <div class="logo">
             <span>ALPHA <span class="red-text">STORE</span> 🎮</span>
         </div>
 
-        <nav class="nav-links">
+        <nav>
             <a href="#home">Home</a>
             <a href="#products">Products</a>
-            <a href="#library">Library</a>
-            <a href="#reviews">Reviews</a>
-            <a href="#about">About Us</a>
+            <a href="#staff">Staff</a>
             <a href="#contact">Contact Us</a>
+            <a href="https://discord.gg/zCGYAmkTgg" target="_blank" class="discord-btn-nav">
+                <i class="fa-brands fa-discord"></i> Discord
+            </a>
         </nav>
-
-        <a href="https://discord.gg/zCGYAmkTgg" target="_blank" class="discord-btn-nav">
-            <i class="fa-brands fa-discord"></i> Discord
-        </a>
     </header>
 
 
@@ -517,7 +677,7 @@
     </section>
 
 
-    <!-- PRODUCTS / GAMES SECTION -->
+    <!-- PRODUCTS SECTION -->
     <section class="products" id="products">
         <div class="section-title">
             <p>NOTRE BOUTIQUE</p>
@@ -631,24 +791,48 @@
     </section>
 
 
+    <!-- STAFF SECTION -->
+    <section class="staff-section" id="staff">
+        <div class="section-title">
+            <p>DISCORD TEAM</p>
+            <h2>Notre Staff 👑</h2>
+        </div>
+
+        <div class="staff-grid">
+            <!-- Member 1: Owner -->
+            <div class="staff-card">
+                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Hamouda" class="staff-avatar">
+                <div class="staff-name">Hamouda</div>
+                <span class="staff-badge">Owner</span>
+            </div>
+
+            <!-- Member 2: Admin -->
+            <div class="staff-card">
+                <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="happy chlb9" class="staff-avatar">
+                <div class="staff-name">happy chlb9</div>
+                <span class="staff-badge admin">Admin</span>
+            </div>
+        </div>
+    </section>
+
+
     <!-- CONTACT SECTION -->
     <section class="contact" id="contact">
         <h2>Besoin d'aide ?</h2>
         <p>Rejoignez notre serveur Discord ou contactez-nous directement sur WhatsApp 💬</p>
-        <div class="hero-buttons" style="justify-content: center;">
+        <div class="contact-buttons">
             <a href="https://discord.gg/zCGYAmkTgg" class="btn btn-discord" target="_blank">
                 <i class="fa-brands fa-discord"></i> Serveur Discord
             </a>
-            <a href="https://wa.me/+21628760130" class="btn" target="_blank">
+            <a href="https://wa.me/21628760103" class="btn" target="_blank">
                 <i class="fa-brands fa-whatsapp"></i> WhatsApp
             </a>
         </div>
     </section>
 
 
-    <!-- CHAT WIDGET (Image 2) -->
+    <!-- CHAT WIDGET -->
     <div class="chat-widget-container">
-        <!-- Chat Popup Window -->
         <div class="chat-popup" id="chatPopup">
             <button class="close-btn" onclick="toggleChat()">
                 <i class="fa-solid fa-xmark"></i>
@@ -662,7 +846,6 @@
             </div>
         </div>
 
-        <!-- Floating Action Button -->
         <button class="chat-trigger-btn" onclick="toggleChat()">
             <i class="fa-solid fa-comment-dots"></i>
             <span class="badge">1</span>
@@ -678,21 +861,18 @@
     </footer>
 
 
-    <!-- JAVASCRIPT LOGIC -->
+    <!-- JAVASCRIPT -->
     <script>
-        // Toggle Floating Chat Widget
         function toggleChat() {
             const chatPopup = document.getElementById('chatPopup');
             chatPopup.classList.toggle('active');
         }
 
-        // Send Chat option to WhatsApp
         function sendMessage(msg) {
-            const phone = "21612345678"; // Remplacez par votre numéro WhatsApp
-            window.open(`https://wa.me/${21628760103}?text=${encodeURIComponent(msg)}`, '_blank');
+            const phone = "21628760103";
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
         }
 
-        // Filter Games (All / Online / Offline)
         function filterGames(type, event) {
             const btns = document.querySelectorAll('.filter-btn');
             btns.forEach(btn => btn.classList.remove('active'));
