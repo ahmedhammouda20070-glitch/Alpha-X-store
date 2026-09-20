@@ -1,0 +1,402 @@
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #0d0d0d;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* Texte rouge lumineux (Neon Glow) */
+.red-text {
+    color: #ff1e27;
+    text-shadow: 0 0 12px rgba(255, 30, 39, 0.8), 0 0 25px rgba(255, 30, 39, 0.4);
+}
+
+/* Keyframes pour les animations de lueur */
+@keyframes redPulse {
+    0% {
+        box-shadow: 0 0 12px rgba(255, 30, 39, 0.4), 0 0 25px rgba(255, 30, 39, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 22px rgba(255, 30, 39, 0.85), 0 0 40px rgba(255, 30, 39, 0.5);
+    }
+    100% {
+        box-shadow: 0 0 12px rgba(255, 30, 39, 0.4), 0 0 25px rgba(255, 30, 39, 0.2);
+    }
+}
+
+@keyframes discordPulse {
+    0% {
+        box-shadow: 0 0 12px rgba(88, 101, 242, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 25px rgba(88, 101, 242, 0.85);
+    }
+    100% {
+        box-shadow: 0 0 12px rgba(88, 101, 242, 0.4);
+    }
+}
+
+/* =========================
+   HEADER & NAVBAR
+========================= */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 8%;
+    background: rgba(15, 15, 15, 0.85);
+    border-bottom: 2px solid #ff1e27;
+    box-shadow: 0 4px 20px rgba(255, 30, 39, 0.3);
+    backdrop-filter: blur(12px);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+nav a:hover {
+    color: #ff1e27;
+    text-shadow: 0 0 10px rgba(255, 30, 39, 0.7);
+}
+
+/* Bouton Discord Nav */
+.discord-btn-nav {
+    background: linear-gradient(135deg, #5865F2, #7289da);
+    padding: 8px 18px;
+    border-radius: 6px;
+    color: white !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: discordPulse 3.5s infinite ease-in-out;
+    transition: all 0.3s ease;
+}
+
+.discord-btn-nav:hover {
+    filter: brightness(1.2);
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(88, 101, 242, 0.9);
+}
+
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    padding: 80px 8%;
+    position: relative;
+    overflow: hidden;
+    background: 
+        radial-gradient(circle at 80% 30%, rgba(255, 30, 39, 0.25), transparent 50%),
+        linear-gradient(135deg, #090909, #141414);
+}
+
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    right: 15%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 30, 39, 0.15);
+    filter: blur(90px);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.hero-content {
+    max-width: 700px;
+    position: relative;
+    z-index: 1;
+}
+
+.small-title {
+    color: #ff1e27;
+    font-size: 15px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(255, 30, 39, 0.6);
+}
+
+.hero h1 {
+    font-size: 58px;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    font-weight: 800;
+}
+
+.description {
+    color: #b0b0b0;
+    font-size: 18px;
+    line-height: 1.7;
+    max-width: 600px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 30px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #ff1e27, #ff4f56);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 700;
+    transition: all 0.3s ease;
+    animation: redPulse 3s infinite ease-in-out;
+}
+
+.btn:hover {
+    filter: brightness(1.2);
+    transform: translateY(-3px) scale(1.02);
+}
+
+.btn-discord {
+    background: linear-gradient(135deg, #5865F2, #7289da);
+    animation: discordPulse 3.5s infinite ease-in-out;
+}
+
+.btn-discord:hover {
+    filter: brightness(1.2);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 0 30px rgba(88, 101, 242, 0.8);
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products {
+    padding: 90px 8%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-title p {
+    color: #ff1e27;
+    font-size: 14px;
+    letter-spacing: 3px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(255, 30, 39, 0.5);
+}
+
+.section-title h2 {
+    font-size: 40px;
+    font-weight: 800;
+}
+
+/* =========================
+   CARDS
+========================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 25px;
+}
+
+.card {
+    background: #151515;
+    border: 1px solid rgba(255, 30, 39, 0.2);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    border-color: #ff1e27;
+    box-shadow: 0 0 25px rgba(255, 30, 39, 0.4);
+}
+
+.game-image {
+    width: 100%;
+    height: 210px;
+    overflow: hidden;
+}
+
+.game-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: 0.5s;
+}
+
+.card:hover .game-image img {
+    transform: scale(1.08);
+}
+
+.game-info {
+    padding: 22px;
+}
+
+.category {
+    color: #ff1e27;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 8px rgba(255, 30, 39, 0.4);
+}
+
+.game-info h3 {
+    font-size: 22px;
+    margin-top: 10px;
+    margin-bottom: 8px;
+    font-weight: 700;
+}
+
+.game-info p {
+    color: #888888;
+    font-size: 14px;
+}
+
+.bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.price {
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 800;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.buy {
+    background: linear-gradient(135deg, #ff1e27, #ff4f56);
+    color: white;
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: 7px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(255, 30, 39, 0.4);
+}
+
+.buy:hover {
+    filter: brightness(1.2);
+    box-shadow: 0 0 15px rgba(255, 30, 39, 0.8);
+}
+
+/* =========================
+   CONTACT & FOOTER
+========================= */
+
+.contact {
+    text-align: center;
+    padding: 90px 20px;
+    background: #141414;
+    border-top: 1px solid #262626;
+    border-bottom: 1px solid #262626;
+}
+
+.contact h2 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.contact p {
+    color: #b0b0b0;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.contact-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+footer {
+    text-align: center;
+    padding: 50px 20px;
+    background: #090909;
+}
+
+footer h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+footer p {
+    color: #888888;
+    margin-bottom: 10px;
+}
+
+.copyright {
+    font-size: 13px;
+    margin-top: 25px;
+}
+
+/* =========================
+   MOBILE RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+    header { padding: 0 5%; }
+    nav { gap: 12px; }
+    nav a { font-size: 13px; }
+    .discord-btn-nav { padding: 6px 12px; }
+    .hero { min-height: 500px; padding: 60px 6%; }
+    .hero h1 { font-size: 38px; }
+    .cards { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Store</title>
+    <!-- Google Font Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================
+           RESET & GENERAL STYLES
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #05070c;
+            color: #ffffff;
+        }
+
+        .red-text {
+            color: #ff1e27;
+        }
+
+        /* =========================
+           1. NAVIGATION BAR (Image 1)
+        ========================= */
+        header.navbar {
+            background-color: #030509;
+            padding: 18px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: #8f9cae;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .discord-btn-nav {
+            background-color: #5865F2;
+            padding: 8px 16px;
+            border-radius: 6px;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .discord-btn-nav:hover {
+            background-color: #4752C4;
+        }
+
+        /* =========================
+           HERO SECTION
+        ========================= */
+        .hero {
+            min-height: 500px;
+            display: flex;
+            align-items: center;
+            padding: 80px 8%;
+            background: 
+                radial-gradient(circle at 80% 30%, rgba(255, 30, 39, 0.15), transparent 40%),
+                linear-gradient(135deg, #05070c, #11141d);
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .small-title {
+            color: #ff1e27;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: 50px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .description {
+            color: #b0b0b0;
+            font-size: 17px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 26px;
+            background: #ff1e27;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: 0.3s;
+            box-shadow: 0 4px 20px rgba(255, 30, 39, 0.4);
+        }
+
+        .btn:hover {
+            background: #d6111a;
+            transform: translateY(-2px);
+        }
+
+        .btn-discord {
+            background: #5865F2;
+            box-shadow: 0 4px 20px rgba(88, 101, 242, 0.4);
+        }
+
+        .btn-discord:hover {
+            background: #4752C4;
+        }
+
+        /* =========================
+           PRODUCTS & FILTERS SECTION
+        ========================= */
+        .products {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .section-title p {
+            color: #ff1e27;
+            font-size: 14px;
+            letter-spacing: 3px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            font-weight: 800;
+        }
+
+        /* FILTER BUTTONS (ALL / ONLINE / OFFLINE) */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+
+        .filter-btn {
+            background: #121620;
+            color: #ffffff;
+            border: 1px solid #262c3a;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-btn:hover {
+            border-color: #ff1e27;
+        }
+
+        .filter-btn.active {
+            background: #ff1e27;
+            border-color: #ff1e27;
+            color: #ffffff;
+            box-shadow: 0 4px 15px rgba(255, 30, 39, 0.4);
+        }
+
+        /* PRODUCT CARDS */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #0f121a;
+            border: 1px solid #1f2430;
+            border-radius: 14px;
+            overflow: hidden;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: #ff1e27;
+            box-shadow: 0 10px 30px rgba(255, 30, 39, 0.2);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .game-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .card:hover .game-image img {
+            transform: scale(1.08);
+        }
+
+        .game-info {
+            padding: 20px;
+        }
+
+        .category {
+            color: #ff1e27;
+            font-size: 12px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .game-info h3 {
+            font-size: 20px;
+            margin-top: 6px;
+            margin-bottom: 6px;
+            font-weight: 700;
+        }
+
+        .game-info p {
+            color: #888888;
+            font-size: 14px;
+        }
+
+        .bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 18px;
+        }
+
+        .price {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 800;
+        }
+
+        .buy {
+            background: #ff1e27;
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .buy:hover {
+            background: #d6111a;
+        }
+
+        /* =========================
+           2. CHAT WIDGET (Image 2)
+        ========================= */
+        .chat-widget-container {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            z-index: 9999;
+        }
+
+        .chat-trigger-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #7000ff;
+            border: none;
+            color: #ffffff;
+            font-size: 26px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(112, 0, 255, 0.4);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.2s ease;
+        }
+
+        .chat-trigger-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .chat-trigger-btn .badge {
+            position: absolute;
+            top: -2px;
+            right: 0px;
+            background-color: #ff2a2a;
+            color: #ffffff;
+            font-size: 12px;
+            font-weight: bold;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #05070c;
+        }
+
+        .chat-popup {
+            display: none;
+            position: absolute;
+            bottom: 75px;
+            right: 0;
+            width: 310px;
+            background-color: rgba(10, 12, 20, 0.95);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        .chat-popup.active {
+            display: block;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -12px;
+            right: -5px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background-color: #ffffff;
+            border: none;
+            color: #000000;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .chat-header-bubble {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .chat-body-options {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .chat-opt-btn {
+            background-color: #ffffff;
+            color: #7000ff;
+            border: 2px solid #7000ff;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chat-opt-btn:hover {
+            background-color: #7000ff;
+            color: #ffffff;
+        }
+
+        /* =========================
+           FOOTER & CONTACT
+        ========================= */
+        .contact {
+            text-align: center;
+            padding: 70px 20px;
+            background: #090c14;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .contact h2 {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .contact p {
+            color: #b0b0b0;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #030509;
+        }
+
+        footer h3 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        footer p {
+            color: #888888;
+        }
+
+        .copyright {
+            font-size: 13px;
+            margin-top: 20px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 800px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 36px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR (Image 1) -->
+    <header class="navbar">
+        <div class="logo">
+            <span>ALPHA <span class="red-text">STORE</span> 🎮</span>
+        </div>
+
+        <nav class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#library">Library</a>
+            <a href="#reviews">Reviews</a>
+            <a href="#about">About Us</a>
+            <a href="#contact">Contact Us</a>
+        </nav>
+
+        <a href="https://discord.gg/zCGYAmkTgg" target="_blank" class="discord-btn-nav">
+            <i class="fa-brands fa-discord"></i> Discord
+        </a>
+    </header>
+
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="small-title">🎮 ALPHA STORE</p>
+            <h1>Les meilleurs jeux<br>aux <span class="red-text">meilleurs prix</span></h1>
+            <p class="description">
+                Achetez vos jeux préférés en Tunisie avec des prix intéressants et un service rapide & fiable 🇹🇳
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#products" class="btn">Voir les jeux</a>
+                <a href="https://discord.gg/zCGYAmkTgg" target="_blank" class="btn btn-discord">
+                    <i class="fa-brands fa-discord"></i> Rejoindre Discord
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- PRODUCTS / GAMES SECTION -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <p>NOTRE BOUTIQUE</p>
+            <h2>Nos jeux 🎮</h2>
+        </div>
+
+        <!-- FILTER BUTTONS -->
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterGames('all', event)">All</button>
+            <button class="filter-btn" onclick="filterGames('online', event)">Online</button>
+            <button class="filter-btn" onclick="filterGames('offline', event)">Offline</button>
+        </div>
+
+        <div class="cards">
+            <!-- GAME 1 -->
+            <div class="card online">
+                <div class="game-image">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e" alt="EA Sports FC 26">
+                </div>
+                <div class="game-info">
+                    <span class="category">ONLINE / FOOTBALL</span>
+                    <h3>EA Sports FC 26</h3>
+                    <p>Jeu de football en ligne</p>
+                    <div class="bottom">
+                        <span class="price">40 DT</span>
+                        <a href="https://wa.me/21612345678?text=Bonjour,%20je%20veux%20acheter%20EA%20Sports%20FC%2026" class="buy" target="_blank">Acheter</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GAME 2 -->
+            <div class="card online">
+                <div class="game-image">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f" alt="GTA V">
+                </div>
+                <div class="game-info">
+                    <span class="category">ONLINE / ACTION</span>
+                    <h3>GTA V</h3>
+                    <p>Action & aventure RP</p>
+                    <div class="bottom">
+                        <span class="price">35 DT</span>
+                        <a href="https://wa.me/21612345678?text=Bonjour,%20je%20veux%20acheter%20GTA%20V" class="buy" target="_blank">Acheter</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GAME 3 -->
+            <div class="card online">
+                <div class="game-image">
+                    <img src="https://images.unsplash.com/photo-1593305841991-05c297ba4575" alt="Call of Duty">
+                </div>
+                <div class="game-info">
+                    <span class="category">ONLINE / FPS</span>
+                    <h3>Call of Duty</h3>
+                    <p>Jeu de tir multijoueur</p>
+                    <div class="bottom">
+                        <span class="price">45 DT</span>
+                        <a href="https://wa.me/21612345678?text=Bonjour,%20je%20veux%20acheter%20Call%20of%20Duty" class="buy" target="_blank">Acheter</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GAME 4 -->
+            <div class="card offline">
+                <div class="game-image">
+                    <img src="https://images.unsplash.com/photo-1605901309584-818e25960a8f" alt="Minecraft">
+                </div>
+                <div class="game-info">
+                    <span class="category">OFFLINE / ADVENTURE</span>
+                    <h3>Minecraft</h3>
+                    <p>Construction & aventure solo</p>
+                    <div class="bottom">
+                        <span class="price">30 DT</span>
+                        <a href="https://wa.me/21612345678?text=Bonjour,%20je%20veux%20acheter%20Minecraft" class="buy" target="_blank">Acheter</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GAME 5 -->
+            <div class="card offline">
+                <div class="game-image">
+                    <img src="https://images.unsplash.com/photo-1606144042614-b2417e99c4e3" alt="God of War">
+                </div>
+                <div class="game-info">
+                    <span class="category">OFFLINE / ACTION</span>
+                    <h3>God of War</h3>
+                    <p>Histoire & aventure solo</p>
+                    <div class="bottom">
+                        <span class="price">50 DT</span>
+                        <a href="https://wa.me/21612345678?text=Bonjour,%20je%20veux%20acheter%20God%20of%20War" class="buy" target="_blank">Acheter</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GAME 6 -->
+            <div class="card offline">
+                <div class="game-image">
+                    <img src="https://images.unsplash.com/photo-1592840496694-26c035b52b8c" alt="Red Dead Redemption 2">
+                </div>
+                <div class="game-info">
+                    <span class="category">OFFLINE / OPEN WORLD</span>
+                    <h3>Red Dead Redemption 2</h3>
+                    <p>Mode histoire complet</p>
+                    <div class="bottom">
+                        <span class="price">45 DT</span>
+                        <a href="https://wa.me/21612345678?text=Bonjour,%20je%20veux%20acheter%20Red%20Dead%20Redemption%202" class="buy" target="_blank">Acheter</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <h2>Besoin d'aide ?</h2>
+        <p>Rejoignez notre serveur Discord ou contactez-nous directement sur WhatsApp 💬</p>
+        <div class="hero-buttons" style="justify-content: center;">
+            <a href="https://discord.gg/zCGYAmkTgg" class="btn btn-discord" target="_blank">
+                <i class="fa-brands fa-discord"></i> Serveur Discord
+            </a>
+            <a href="https://wa.me/21612345678" class="btn" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </section>
+
+
+    <!-- CHAT WIDGET (Image 2) -->
+    <div class="chat-widget-container">
+        <!-- Chat Popup Window -->
+        <div class="chat-popup" id="chatPopup">
+            <button class="close-btn" onclick="toggleChat()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="chat-header-bubble">
+                <span>👋 Hi! How can we help?</span>
+            </div>
+            <div class="chat-body-options">
+                <button class="chat-opt-btn" onclick="sendMessage('I have a question')">I have a question</button>
+                <button class="chat-opt-btn" onclick="sendMessage('Tell me more')">Tell me more</button>
+            </div>
+        </div>
+
+        <!-- Floating Action Button -->
+        <button class="chat-trigger-btn" onclick="toggleChat()">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span class="badge">1</span>
+        </button>
+    </div>
+
+
+    <!-- FOOTER -->
+    <footer>
+        <h3>ALPHA <span class="red-text">STORE</span> 🎮</h3>
+        <p>Votre boutique de jeux vidéo en Tunisie 🇹🇳</p>
+        <p class="copyright">© 2026 Alpha Store - Tous droits réservés</p>
+    </footer>
+
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Toggle Floating Chat Widget
+        function toggleChat() {
+            const chatPopup = document.getElementById('chatPopup');
+            chatPopup.classList.toggle('active');
+        }
+
+        // Send Chat option to WhatsApp
+        function sendMessage(msg) {
+            const phone = "21612345678"; // Remplacez par votre numéro WhatsApp
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        }
+
+        // Filter Games (All / Online / Offline)
+        function filterGames(type, event) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (type === 'all') {
+                    card.style.display = 'block';
+                } else {
+                    if (card.classList.contains(type)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
