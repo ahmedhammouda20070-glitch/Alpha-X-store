@@ -82,10 +82,27 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             font-size: 22px;
             font-weight: 800;
             letter-spacing: 1px;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .site-logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(255, 30, 39, 0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .site-logo {
+            transform: scale(1.05);
         }
 
         nav {
@@ -443,7 +460,6 @@
             text-shadow: 0 0 8px rgba(88, 101, 242, 0.6);
         }
 
-        /* Badge spécifique pour l'Admin */
         .staff-badge.admin {
             background: rgba(255, 30, 39, 0.2);
             color: #ff1e27;
@@ -608,6 +624,13 @@
             background: #090909;
         }
 
+        .footer-logo {
+            height: 60px;
+            width: auto;
+            margin-bottom: 15px;
+            filter: drop-shadow(0 0 8px rgba(255, 30, 39, 0.5));
+        }
+
         footer h3 {
             font-size: 24px;
             margin-bottom: 10px;
@@ -631,6 +654,7 @@
             header { padding: 0 5%; }
             nav { gap: 12px; }
             nav a { font-size: 13px; }
+            .site-logo { height: 40px; }
             .discord-btn-nav { padding: 6px 12px; }
             .hero { min-height: 500px; padding: 60px 6%; }
             .hero h1 { font-size: 38px; }
@@ -642,9 +666,10 @@
 
     <!-- NAVBAR -->
     <header>
-        <div class="logo">
+        <a href="#home" class="logo">
+            <img src="logo.png" alt="Alpha Store Logo" class="site-logo">
             <span>ALPHA <span class="red-text">STORE</span> 🎮</span>
-        </div>
+        </a>
 
         <nav>
             <a href="#home">Home</a>
@@ -801,16 +826,16 @@
         <div class="staff-grid">
             <!-- Member 1: Owner -->
             <div class="staff-card">
-                <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Hamouda" class="staff-avatar">
+                <img src="IMG_4945.jpg" alt="Hamouda" class="staff-avatar">
                 <div class="staff-name">Hamouda</div>
-                <span class="staff-badge">Owner</span>
+                <span class="staff-badge">Co Owner</span>
             </div>
 
             <!-- Member 2: Admin -->
             <div class="staff-card">
-                <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="happy chlb9" class="staff-avatar">
-                <div class="staff-name">happy chlb9</div>
-                <span class="staff-badge admin">Admin</span>
+                <img src="imageee.png" alt="happy chlb9" class="staff-avatar">
+                <div class="staff-name">Happy Chlb9</div>
+                <span class="staff-badge admin">Owner</span>
             </div>
         </div>
     </section>
@@ -855,6 +880,7 @@
 
     <!-- FOOTER -->
     <footer>
+        <img src="logo.png" alt="Alpha Store Logo" class="footer-logo">
         <h3>ALPHA <span class="red-text">STORE</span> 🎮</h3>
         <p>Votre boutique de jeux vidéo en Tunisie 🇹🇳</p>
         <p class="copyright">© 2026 Alpha Store - Tous droits réservés</p>
