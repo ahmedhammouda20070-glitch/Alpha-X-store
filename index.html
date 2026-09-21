@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpha Store</title>
+    <!-- Google Font Poppins -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================
+           GENERAL & RESET
+        ========================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #0d0d0d;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        .red-text {
+            color: #ff1e27;
+            text-shadow: 0 0 12px rgba(255, 30, 39, 0.8), 0 0 25px rgba(255, 30, 39, 0.4);
+        }
+
+        @keyframes redPulse {
+            0% { box-shadow: 0 0 12px rgba(255, 30, 39, 0.4), 0 0 25px rgba(255, 30, 39, 0.2); }
+            50% { box-shadow: 0 0 22px rgba(255, 30, 39, 0.85), 0 0 40px rgba(255, 30, 39, 0.5); }
+            100% { box-shadow: 0 0 12px rgba(255, 30, 39, 0.4), 0 0 25px rgba(255, 30, 39, 0.2); }
+        }
+
+        @keyframes discordPulse {
+            0% { box-shadow: 0 0 12px rgba(88, 101, 242, 0.4); }
+            50% { box-shadow: 0 0 25px rgba(88, 101, 242, 0.85); }
+            100% { box-shadow: 0 0 12px rgba(88, 101, 242, 0.4); }
+        }
+
+        /* =========================
+           HEADER & NAVBAR
+        ========================= */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 8%;
+            background: rgba(15, 15, 15, 0.85);
+            border-bottom: 2px solid #ff1e27;
+            box-shadow: 0 4px 20px rgba(255, 30, 39, 0.3);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        .site-logo {
+            height: 50px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 0 8px rgba(255, 30, 39, 0.5));
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover .site-logo {
+            transform: scale(1.05);
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #ff1e27;
+            text-shadow: 0 0 10px rgba(255, 30, 39, 0.7);
+        }
+
+        .cart-icon-btn {
+            position: relative;
+            background: #151515;
+            border: 1px solid #ff1e27;
+            color: #ffffff;
+            padding: 8px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cart-icon-btn:hover {
+            background: #ff1e27;
+            box-shadow: 0 0 15px rgba(255, 30, 39, 0.7);
+        }
+
+        .cart-badge {
+            background: #ff1e27;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            padding: 2px 7px;
+            border-radius: 50%;
+        }
+
+        .cart-icon-btn:hover .cart-badge {
+            background: white;
+            color: #ff1e27;
+        }
+
+        .discord-btn-nav {
+            background: linear-gradient(135deg, #5865F2, #7289da);
+            padding: 8px 18px;
+            border-radius: 6px;
+            color: white !important;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            animation: discordPulse 3.5s infinite ease-in-out;
+            transition: all 0.3s ease;
+        }
+
+        /* =========================
+           HERO SECTION
+        ========================= */
+        .hero {
+            min-height: 550px;
+            display: flex;
+            align-items: center;
+            padding: 80px 8%;
+            background: 
+                radial-gradient(circle at 80% 30%, rgba(255, 30, 39, 0.25), transparent 50%),
+                linear-gradient(135deg, #090909, #141414);
+        }
+
+        .hero-content {
+            max-width: 700px;
+        }
+
+        .small-title {
+            color: #ff1e27;
+            font-size: 15px;
+            font-weight: bold;
+            letter-spacing: 3px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 56px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            font-weight: 800;
+        }
+
+        .description {
+            color: #b0b0b0;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 15px;
+            padding: 14px 28px;
+            background: linear-gradient(135deg, #ff1e27, #ff4f56);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            animation: redPulse 3s infinite ease-in-out;
+        }
+
+        .btn-discord {
+            background: linear-gradient(135deg, #5865F2, #7289da);
+            animation: discordPulse 3.5s infinite ease-in-out;
+            margin-left: 10px;
+        }
+
+        /* =========================
+           PRODUCTS & FILTERS
+        ========================= */
+        .products {
+            padding: 80px 8%;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title p {
+            color: #ff1e27;
+            font-size: 14px;
+            letter-spacing: 3px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            font-weight: 800;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: #151515;
+            color: #ffffff;
+            border: 1px solid rgba(255, 30, 39, 0.3);
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .filter-btn.active, .filter-btn:hover {
+            background: linear-gradient(135deg, #ff1e27, #ff4f56);
+            border-color: #ff1e27;
+            color: #ffffff;
+            box-shadow: 0 0 15px rgba(255, 30, 39, 0.6);
+        }
+
+        /* =========================
+           CARDS & SELECT STYLES
+        ========================= */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #151515;
+            border: 1px solid rgba(255, 30, 39, 0.2);
+            border-radius: 14px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: #ff1e27;
+            box-shadow: 0 0 25px rgba(255, 30, 39, 0.4);
+        }
+
+        .game-image {
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .game-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .card:hover .game-image img {
+            transform: scale(1.08);
+        }
+
+        .game-info {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: space-between;
+        }
+
+        .category {
+            color: #ff1e27;
+            font-size: 11px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .game-info h3 {
+            font-size: 20px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .product-select-label {
+            font-size: 12px;
+            color: #aaaaaa;
+            margin-top: 8px;
+            display: block;
+        }
+
+        /* Dropdown styling */
+        .product-select {
+            width: 100%;
+            padding: 10px 12px;
+            margin: 8px 0 15px 0;
+            background: #1e1e1e;
+            color: #ffffff;
+            border: 1px solid #ff1e27;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .product-select:hover, .product-select:focus {
+            box-shadow: 0 0 12px rgba(255, 30, 39, 0.5);
+            background: #252525;
+        }
+
+        .bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .price {
+            color: #ffffff;
+            font-size: 20px;
+            font-weight: 800;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+        }
+
+        .add-to-cart-btn {
+            background: linear-gradient(135deg, #ff1e27, #ff4f56);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 7px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .add-to-cart-btn:hover {
+            filter: brightness(1.2);
+            box-shadow: 0 0 15px rgba(255, 30, 39, 0.8);
+        }
+
+        /* =========================
+           PANIER MODAL / SIDEBAR
+        ========================= */
+        .cart-modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .cart-modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            max-width: 90%;
+            height: 100%;
+            background: #111111;
+            border-left: 2px solid #ff1e27;
+            box-shadow: -10px 0 30px rgba(255, 30, 39, 0.3);
+            z-index: 2001;
+            transition: right 0.4s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 25px;
+        }
+
+        .cart-modal.active {
+            right: 0;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+            padding-bottom: 15px;
+        }
+
+        .close-cart-btn {
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 22px;
+            cursor: pointer;
+        }
+
+        .close-cart-btn:hover { color: #ff1e27; }
+
+        .cart-items-container {
+            flex: 1;
+            overflow-y: auto;
+            margin: 20px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cart-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #181818;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #282828;
+        }
+
+        .cart-item-details h4 {
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-details span {
+            color: #ff1e27;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .remove-item-btn {
+            background: transparent;
+            border: none;
+            color: #888;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .remove-item-btn:hover { color: #ff1e27; }
+
+        .cart-footer {
+            border-top: 1px solid #222;
+            padding-top: 15px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .empty-cart-msg {
+            text-align: center;
+            color: #666;
+            margin-top: 40px;
+            font-size: 14px;
+        }
+
+        /* =========================
+           STAFF, CONTACT & FOOTER
+        ========================= */
+        .staff-section {
+            padding: 80px 8%;
+            background: #111111;
+            border-top: 1px solid #222222;
+        }
+
+        .staff-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .staff-card {
+            background: #151515;
+            border: 1px solid rgba(88, 101, 242, 0.3);
+            padding: 25px 20px;
+            border-radius: 16px;
+            width: 230px;
+            text-align: center;
+        }
+
+        .staff-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid #5865F2;
+            margin-bottom: 15px;
+            object-fit: cover;
+        }
+
+        .staff-name { font-weight: 700; font-size: 18px; }
+
+        .staff-badge {
+            display: inline-block;
+            background: rgba(88, 101, 242, 0.2);
+            color: #5865F2;
+            border: 1px solid #5865F2;
+            font-size: 12px;
+            font-weight: 700;
+            padding: 4px 14px;
+            border-radius: 20px;
+            margin-top: 10px;
+        }
+
+        .staff-badge.admin {
+            background: rgba(255, 30, 39, 0.2);
+            color: #ff1e27;
+            border-color: #ff1e27;
+        }
+
+        .contact {
+            text-align: center;
+            padding: 80px 20px;
+            background: #141414;
+            border-top: 1px solid #262626;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            background: #090909;
+        }
+
+        .footer-logo { height: 50px; margin-bottom: 10px; }
+
+        @media (max-width: 700px) {
+            header { padding: 0 5%; }
+            nav { gap: 10px; }
+            nav a { font-size: 12px; }
+            .hero h1 { font-size: 36px; }
+            .cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR -->
+    <header>
+        <a href="#home" class="logo">
+            <img src="logo.png" alt="Alpha Store Logo" class="site-logo">
+            <span>ALPHA <span class="red-text">STORE</span> </span>
+        </a>
+
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#products">Products</a>
+            <a href="#staff">Staff</a>
+            <a href="#contact">Contact</a>
+            
+            <button class="cart-icon-btn" onclick="toggleCart()">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span class="cart-badge" id="cartCount">0</span>
+            </button>
+
+            <a href="https://discord.gg/zCGYAmkTgg" target="_blank" class="discord-btn-nav">
+                <i class="fa-brands fa-discord"></i> Discord
+            </a>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <p class="small-title">🎮 ALPHA STORE</p>
+            <h1>Les meilleurs services<br>aux <span class="red-text">meilleurs prix</span></h1>
+            <p class="description">
+                Achetez vos comptes, VP, Gift Cards, Abonnements Netflix et Boost Social Media en Tunisie 🇹🇳
+            </p>
+
+            <div>
+                <a href="#products" class="btn">Voir les produits</a>
+                <a href="https://discord.gg/zCGYAmkTgg" target="_blank" class="btn btn-discord">
+                    <i class="fa-brands fa-discord"></i> Rejoindre Discord
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION -->
+    <section class="products" id="products">
+        <div class="section-title">
+            <p>NOTRE BOUTIQUE</p>
+            <h2>Nos Offres & Produits ⚡</h2>
+        </div>
+
+        <!-- FILTER BUTTONS -->
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterGames('all', event)">Tout</button>
+            <button class="filter-btn" onclick="filterGames('accounts', event)">Comptes Jeux</button>
+            <button class="filter-btn" onclick="filterGames('points', event)">Points & Gift Cards</button>
+            <button class="filter-btn" onclick="filterGames('subs', event)">Subscriptions</button>
+            <button class="filter-btn" onclick="filterGames('social', event)">Social Media</button>
+        </div>
+
+        <div class="cards">
+
+            <!-- GTA V ACCOUNTS -->
+            <div class="card accounts">
+                <div class="game-image">
+                    <img src="IMG_9257.jpg" alt="GTA V">
+                </div>
+                <div class="game-info">
+                    <span class="category">GTA V / ACCOUNTS</span>
+                    <h3>GTA 5 Accounts</h3>
+                    <label class="product-select-label">Choisir le type de compte:</label>
+                    
+                    <select id="gtaSelect" class="product-select" onchange="updatePrice('gtaSelect', 'gtaPrice')">
+                        <option value="GTA 5 Rockstar Acc" data-price="25">Rockstar Acc - 25 DT</option>
+                        <option value="GTA 5 Steam Acc" data-price="37">Steam Acc - 37 DT</option>
+                        <option value="GTA 5 FiveM Ready Acc" data-price="10">FiveM Ready Acc - 10 DT</option>
+                    </select>
+
+                    <div class="bottom">
+                        <span class="price" id="gtaPrice">25 DT</span>
+                        <button class="add-to-cart-btn" onclick="addSelectedToCart('gtaSelect')">
+                            <i class="fa-solid fa-cart-plus"></i> Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VALORANT VP EU/GLOBAL -->
+            <div class="card points">
+                <div class="game-image">
+                    <img src="IMG_9256.jpg" alt="Valorant VP EU">
+                </div>
+                <div class="game-info">
+                    <span class="category">VALORANT / VP EU</span>
+                    <h3>Valorant VP (EU/GLOBAL)</h3>
+                    <label class="product-select-label">Choisir le Pack VP:</label>
+                    
+                    <select id="valEuSelect" class="product-select" onchange="updatePrice('valEuSelect', 'valEuPrice')">
+                        <option value="Valorant VP EU (475 VP)" data-price="15">475 VP - 15 DT</option>
+                        <option value="Valorant VP EU (1000 VP)" data-price="37">1000 VP - 37 DT</option>
+                        <option value="Valorant VP EU (1520 VP)" data-price="60">1520 VP - 60 DT</option>
+                        <option value="Valorant VP EU (2200 VP)" data-price="74">2200 VP - 74 DT</option>
+                        <option value="Valorant VP EU (2565 VP)" data-price="90">2565 VP - 90 DT</option>
+                        <option value="Valorant VP EU (3650 VP)" data-price="110">3650 VP - 110 DT</option>
+                        <option value="Valorant VP EU (5320 VP)" data-price="174">5320 VP - 174 DT</option>
+                    </select>
+
+                    <div class="bottom">
+                        <span class="price" id="valEuPrice">15 DT</span>
+                        <button class="add-to-cart-btn" onclick="addSelectedToCart('valEuSelect')">
+                            <i class="fa-solid fa-cart-plus"></i> Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VALORANT VP TR -->
+            <div class="card points">
+                <div class="game-image">
+                    <img src="IMG_9256.jpg" alt="Valorant VP TR">
+                </div>
+                <div class="game-info">
+                    <span class="category">VALORANT / VP TR</span>
+                    <h3>Valorant VP (Region TR)</h3>
+                    <label class="product-select-label">Choisir le Pack TR:</label>
+                    
+                    <select id="valTrSelect" class="product-select" onchange="updatePrice('valTrSelect', 'valTrPrice')">
+                        <option value="Valorant VP TR (150 VP)" data-price="5">150 VP - 5 DT</option>
+                        <option value="Valorant VP TR (600 VP)" data-price="17">600 VP - 17 DT</option>
+                        <option value="Valorant VP TR (1200 VP)" data-price="32">1200 VP - 32 DT</option>
+                        <option value="Valorant VP TR (2200 VP)" data-price="53">2200 VP - 53 DT</option>
+                        <option value="Valorant VP TR (3500 VP)" data-price="80">3500 VP - 80 DT</option>
+                        <option value="Valorant VP TR (7300 VP)" data-price="150">7300 VP - 150 DT</option>
+                    </select>
+
+                    <div class="bottom">
+                        <span class="price" id="valTrPrice">5 DT</span>
+                        <button class="add-to-cart-btn" onclick="addSelectedToCart('valTrSelect')">
+                            <i class="fa-solid fa-cart-plus"></i> Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LEAGUE OF LEGENDS RP -->
+            <div class="card points">
+                <div class="game-image">
+                    <img src="IMG_9260.jpg" alt="League of Legends RP">
+                </div>
+                <div class="game-info">
+                    <span class="category">LOL / RP GIFT CARD</span>
+                    <h3>League of Legends RP</h3>
+                    <label class="product-select-label">Choisir la Carte RP (EU):</label>
+                    
+                    <select id="lolSelect" class="product-select" onchange="updatePrice('lolSelect', 'lolPrice')">
+                        <option value="LoL Gift Card 2.5€ (EU)" data-price="10">2.5€ - 10 DT</option>
+                        <option value="LoL Gift Card 5€ (EU)" data-price="20">5€ - 20 DT</option>
+                        <option value="LoL Gift Card 10€ (EU)" data-price="37">10€ - 37 DT</option>
+                        <option value="LoL Gift Card 15€ (EU)" data-price="50">15€ - 50 DT</option>
+                        <option value="LoL Gift Card 20€ (EU)" data-price="70">20€ - 70 DT</option>
+                        <option value="LoL Gift Card 25€ (EU)" data-price="90">25€ - 90 DT</option>
+                        <option value="LoL Gift Card 50€ (EU)" data-price="175">50€ - 175 DT</option>
+                    </select>
+
+                    <div class="bottom">
+                        <span class="price" id="lolPrice">10 DT</span>
+                        <button class="add-to-cart-btn" onclick="addSelectedToCart('lolSelect')">
+                            <i class="fa-solid fa-cart-plus"></i> Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORTNITE V-BUCKS -->
+            <div class="card points">
+                <div class="game-image">
+                    <img src="IMG_9259.jpg" alt="Fortnite V-Bucks">
+                </div>
+                <div class="game-info">
+                    <span class="category">FORTNITE / V-BUCKS</span>
+                    <h3>Fortnite V-Bucks</h3>
+                    <label class="product-select-label">Choisir le Pack V-Bucks:</label>
+                    
+                    <select id="fnSelect" class="product-select" onchange="updatePrice('fnSelect', 'fnPrice')">
+                        <option value="Fortnite 1000 V-Bucks" data-price="26">1000 V-Bucks - 26 DT</option>
+                        <option value="Fortnite 2800 V-Bucks" data-price="64">2800 V-Bucks - 64 DT</option>
+                        <option value="Fortnite 5000 V-Bucks" data-price="98">5000 V-Bucks - 98 DT</option>
+                        <option value="Fortnite 13500 V-Bucks" data-price="270">13500 V-Bucks - 270 DT</option>
+                    </select>
+
+                    <div class="bottom">
+                        <span class="price" id="fnPrice">26 DT</span>
+                        <button class="add-to-cart-btn" onclick="addSelectedToCart('fnSelect')">
+                            <i class="fa-solid fa-cart-plus"></i> Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NETFLIX PREMIUM -->
+            <div class="card subs">
+                <div class="game-image">
+                    <img src="IMG_9263.jpg" alt="Netflix Premium">
+                </div>
+                <div class="game-info">
+                    <span class="category">NETFLIX / PREMIUM 4K</span>
+                    <h3>Netflix Premium 4K</h3>
+                    <label class="product-select-label">Choisir la durée (4 Devices):</label>
+                    
+                    <select id="netflixSelect" class="product-select" onchange="updatePrice('netflixSelect', 'netflixPrice')">
+                        <option value="Netflix Premium (2 Mois)" data-price="25">2 Mois - 25 DT</option>
+                        <option value="Netflix Premium (3 Mois)" data-price="35">3 Mois - 35 DT</option>
+                        <option value="Netflix Premium (6 Mois)" data-price="40">6 Mois - 40 DT</option>
+                        <option value="Netflix Premium (12 Mois)" data-price="88">12 Mois - 88 DT</option>
+                    </select>
+
+                    <div class="bottom">
+                        <span class="price" id="netflixPrice">25 DT</span>
+                        <button class="add-to-cart-btn" onclick="addSelectedToCart('netflixSelect')">
+                            <i class="fa-solid fa-cart-plus"></i> Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DISCORD NITRO -->
+            <div class="card subs">
+                <div class="game-image">
+                    <img src="IMG_9261.jpg" alt="Discord Nitro">
+                </div>
+                <div class="game-info">
+                    <span class="category">DISCORD / NITRO</span>
+                    <h3>Discord Nitro Gaming</h3>
+                    <label class="product-select-label">Choisir l'abonnement Nitro:</label>
+                    
+                    <select id="nitroSelect" class="product-select" onchange="updatePrice('nitroSelect', 'nitroPrice')">
+                        <option value="Discord Nitro Gaming (3 Mois)" data-price="60">3 Mois Gaming - 60 DT</option>
+                        <option value="Discord Nitro Gaming (1 An)" data-price="87">1 An Gaming - 87 DT</option>
+                    </select>
+
+                    <div class="bottom">
+                        <span class="price" id="nitroPrice">60 DT</span>
+                        <button class="add-to-cart-btn" onclick="addSelectedToCart('nitroSelect')">
+                            <i class="fa-solid fa-cart-plus"></i> Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOCIAL MEDIA BOOST -->
+            <div class="card social">
+                <div class="game-image">
+                    <img src="IMG_9262.jpg" alt="Social Media Boost">
+                </div>
+                <div class="game-info">
+                    <span class="category">SOCIAL MEDIA / BOOST</span>
+                    <h3>Social Media Services</h3>
+                    <label class="product-select-label">Choisir le service & quantité:</label>
+                    
+                    <select id="socialSelect" class="product-select" onchange="updatePrice('socialSelect', 'socialPrice')">
+                        <!-- Instagram -->
+                        <option value="Instagram Followers (1K)" data-price="10">Insta Followers 1K - 10 DT</option>
+                        <option value="Instagram Followers (5K)" data-price="20">Insta Followers 5K - 20 DT</option>
+                        <option value="Instagram Followers (10K)" data-price="37">Insta Followers 10K - 37 DT</option>
+                        <!-- TikTok -->
+                        <option value="TikTok Followers (1K)" data-price="7">TikTok Followers 1K - 7 DT</option>
+                        <option value="TikTok Followers (5K)" data-price="20">TikTok Followers 5K - 20 DT</option>
+                        <option value="TikTok Followers (10K)" data-price="30">TikTok Followers 10K - 30 DT</option>
+                        <!-- YouTube -->
+                        <option value="YouTube Subscribers (1K)" data-price="20">YouTube Subs 1K - 20 DT</option>
+                        <option value="YouTube Subscribers (5K)" data-price="40">YouTube Subs 5K - 40 DT</option>
+                        <option value="YouTube Subscribers (10K)" data-price="67">YouTube Subs 10K - 67 DT</option>
+                        <!-- Facebook -->
+                        <option value="Facebook Page Followers (1K)" data-price="13">FB Page Followers 1K - 13 DT</option>
+                        <option value="Facebook Page Followers (5K)" data-price="38">FB Page Followers 5K - 38 DT</option>
+                        <option value="Facebook Page Followers (10K)" data-price="67">FB Page Followers 10K - 67 DT</option>
+                    </select>
+
+                    <div class="bottom">
+                        <span class="price" id="socialPrice">10 DT</span>
+                        <button class="add-to-cart-btn" onclick="addSelectedToCart('socialSelect')">
+                            <i class="fa-solid fa-cart-plus"></i> Ajouter
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- PANIER (CART SIDEBAR) -->
+    <div class="cart-modal-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+    <div class="cart-modal" id="cartModal">
+        <div class="cart-header">
+            <h3>Mon Panier 🛒</h3>
+            <button class="close-cart-btn" onclick="toggleCart()">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="cart-items-container" id="cartItemsContainer">
+            <p class="empty-cart-msg">Votre panier est vide 🎮</p>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0 DT</span>
+            </div>
+            <button class="checkout-btn" onclick="checkoutWhatsApp()">
+                <i class="fa-brands fa-whatsapp"></i> Commander sur WhatsApp
+            </button>
+        </div>
+    </div>
+
+    <!-- STAFF SECTION -->
+    <section class="staff-section" id="staff">
+        <div class="section-title">
+            <p>DISCORD TEAM</p>
+            <h2>Notre Staff 👑</h2>
+        </div>
+
+        <div class="staff-grid">
+            <div class="staff-card">
+                <img src="IMG_4945.jpg" alt="Hamouda" class="staff-avatar">
+                <div class="staff-name">Hamouda</div>
+                <span class="staff-badge">Developer</span>
+            </div>
+
+            <div class="staff-card">
+                <img src="imageee.png" alt="Happy Chlb9" class="staff-avatar">
+                <div class="staff-name">Happy Chlb9</div>
+                <span class="staff-badge admin">Owner</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact" id="contact">
+        <h2>Besoin d'aide ?</h2>
+        <p>Rejoignez notre serveur Discord ou contactez-nous directement sur WhatsApp 💬</p>
+        <div>
+            <a href="https://discord.gg/zCGYAmkTgg" class="btn btn-discord" target="_blank">
+                <i class="fa-brands fa-discord"></i> Serveur Discord
+            </a>
+            <a href="https://wa.me/21628760103" class="btn" target="_blank">
+                <i class="fa-brands fa-whatsapp"></i> WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <img src="logo.png" alt="Alpha Store Logo" class="footer-logo">
+        <h3>ALPHA <span class="red-text">STORE</span> 🎮</h3>
+        <p>Votre boutique de jeux vidéo et services en Tunisie 🇹🇳</p>
+        <p style="font-size: 12px; color: #555; margin-top: 15px;">© 2026 Alpha Store - Tous droits réservés</p>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        let cart = [];
+
+        // Toggle Cart Sidebar
+        function toggleCart() {
+            document.getElementById('cartOverlay').classList.toggle('active');
+            document.getElementById('cartModal').classList.toggle('active');
+        }
+
+        // Update displayed price when changing dropdown option
+        function updatePrice(selectId, priceDisplayId) {
+            const selectElement = document.getElementById(selectId);
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            const price = selectedOption.getAttribute('data-price');
+            document.getElementById(priceDisplayId).textContent = price + ' DT';
+        }
+
+        // Add selected dropdown option to cart
+        function addSelectedToCart(selectId) {
+            const selectElement = document.getElementById(selectId);
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            
+            const title = selectedOption.value;
+            const price = parseFloat(selectedOption.getAttribute('data-price'));
+            
+            cart.push({ title, price });
+            updateCartUI();
+            toggleCart();
+        }
+
+        // Remove item from cart
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        // Refresh Cart UI
+        function updateCartUI() {
+            const cartItemsContainer = document.getElementById('cartItemsContainer');
+            const cartCount = document.getElementById('cartCount');
+            const cartTotal = document.getElementById('cartTotal');
+
+            cartCount.textContent = cart.length;
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p class="empty-cart-msg">Votre panier est vide 🎮</p>';
+                cartTotal.textContent = '0 DT';
+                return;
+            }
+
+            let html = '';
+            let total = 0;
+
+            cart.forEach((item, index) => {
+                total += item.price;
+                html += `
+                    <div class="cart-item">
+                        <div class="cart-item-details">
+                            <h4>${item.title}</h4>
+                            <span>${item.price} DT</span>
+                        </div>
+                        <button class="remove-item-btn" onclick="removeFromCart(${index})">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </div>
+                `;
+            });
+
+            cartItemsContainer.innerHTML = html;
+            cartTotal.textContent = total + ' DT';
+        }
+
+        // Send order to WhatsApp
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('Votre panier est vide!');
+                return;
+            }
+
+            const phone = "21628760103";
+            let total = 0;
+            let itemList = "";
+
+            cart.forEach((item) => {
+                itemList += `%0A- ${item.title} (${item.price} DT)`;
+                total += item.price;
+            });
+
+            const message = `Bonjour Alpha Store,%20je%20souhaite%20commander%20les%20produits%20suivants%20:${itemList}%0A%0A*Total:*%20${total}%20DT`;
+
+            window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+        }
+
+        // Filter Category Buttons
+        function filterGames(type, event) {
+            const btns = document.querySelectorAll('.filter-btn');
+            btns.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (type === 'all') {
+                    card.style.display = 'flex';
+                } else {
+                    if (card.classList.contains(type)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
